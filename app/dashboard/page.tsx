@@ -1,6 +1,13 @@
+import {auth} from "@clerk/nextjs"
+
+import Dropzone from "@/components/Dropzone"
+
 const Page = () => {
+  const { userId } = auth()
   return (
-    <div>Page</div>
+    <div>
+      <Dropzone />
+    </div>
   )
 }
 
