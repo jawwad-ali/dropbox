@@ -9,12 +9,12 @@ export default function Home() {
         <div className="p-10 flex flex-col bg-[#2B2929] dark:bg-slate-800 text-white space-y-5 ">
           <h1 className="text-5xl font-bold">
             Welcome to Dropbox. 
-            <br /> <br />
+            <br /> <br /> 
             Storing everything for you and your business needs. All in one
             place.
-          </h1>
+          </h1> 
 
-          <p>
+          <p className="leading-normal">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt
             qui tenetur facere tempora, molestias id maxime soluta odit, quam,
             aut vitae ex molestiae recusandae sed tempore dolor sequi libero ea.
@@ -45,4 +45,4 @@ export default function Home() {
   );
 }
 
-// 1.26.17
+// 1.36.39
