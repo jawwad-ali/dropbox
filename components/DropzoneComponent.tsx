@@ -1,7 +1,7 @@
 "use client";
 import { cn } from "@/lib/utils";
 
-import { useState } from "react";
+import { useState } from "react"; 
 
 import Dropzone from "react-dropzone";
 
@@ -10,7 +10,7 @@ import { addDoc, collection, doc, serverTimestamp, updateDoc } from "firebase/fi
 import { db, storage } from "@/firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
-export default function DropzoneComponent() {
+export default function DropzoneComponent() { 
   const [loading, setLoading] = useState<boolean>(false); // loading state
   const { user, isSignedIn, isLoaded } = useUser();
 
@@ -82,7 +82,7 @@ export default function DropzoneComponent() {
         const isFileTooLarge =
           fileRejections.length > 0 && fileRejections[0].file.size > maxSize;
         return (
-          <section>
+          <section className="m-5">
             <div
               {...getRootProps()}
               className={cn(
