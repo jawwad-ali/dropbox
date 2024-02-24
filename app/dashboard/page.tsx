@@ -4,11 +4,13 @@ import DropzoneComponent from "@/components/DropzoneComponent";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "@/firebase";
 import { FileType } from "@/typings";
+
 import TableWrapper from "@/components/table/TableWrapper";
 
 const Page = async () => {
   const { userId } = auth();
 
+  // Getting the user collection and file from firebase
   const docsResult = await getDocs(collection(db, "users", userId!, "files"));
 
   // @ts-ignore
@@ -30,17 +32,13 @@ const Page = async () => {
     <div className="border-t">
       <DropzoneComponent />
 
-
       <div className="container space-y-5">
         <h2 className="font-bold pt-5">All Files</h2>
 
         <div>
-          {/* TableWrapper */}
           <TableWrapper skeletonFiles={skeletonFiles} />
         </div>
-
       </div>
-
     </div>
   );
 };
