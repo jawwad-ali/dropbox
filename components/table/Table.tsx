@@ -1,5 +1,7 @@
 "use client";
 
+import { useAppStore } from "@/store/store";
+
 import {
   ColumnDef,
   flexRender,
@@ -19,6 +21,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { TrashIcon } from "lucide-react";
 import { FileType } from "@/typings";
+import { DeleteModal } from "./DeleteModal";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -34,6 +37,21 @@ export function DataTable<TData, TValue>({
     columns,
     getCoreRowModel: getCoreRowModel(),
   });
+
+  // Deleting a Record
+  // Getting the global states from zustand
+  const [fieldId, setFieldId, isDeleteModalOpen, setIsDeleteModalOpen] =
+    useAppStore((state) => [
+      state.fieldId,
+      state.setFieldId,
+      state.isDeleteModalOpen,
+      state.setIsDeleteModalOpen
+    ]);
+
+  const onDeleteModal = (fieldId: string ) => {
+    setFieldId(fieldId);
+    setIsDeleteModalOpen(true);
+  };
 
   return (
     <div className="rounded-md border">
@@ -63,6 +81,10 @@ export function DataTable<TData, TValue>({
                 key={row.id}
                 data-state={row.getIsSelected() && "selected"}
               >
+                
+                {/* Delete Modal */}
+                <DeleteModal />
+
                 {row.getVisibleCells().map((cell) => (
                   <TableCell key={cell.id}>
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
@@ -73,7 +95,8 @@ export function DataTable<TData, TValue>({
                   <Button
                     variant={"outline"}
                     onClick={() => {
-                      console.log("Hello");
+                      // @ts-ignore
+                      onDeleteModal((row.original as FileType).id);
                     }}
                   >
                     <TrashIcon size={20} />
